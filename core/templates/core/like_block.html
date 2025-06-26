@@ -1,0 +1,5 @@
+<div id="like-block" hx-post="{% url 'like_rider' rider.pk %}" hx-target="#like-block" hx-swap="outerHTML">
+  {% csrf_token %}
+  <h3>Лайков: {{ rider.likes_count }}</h3>
+  <button type="submit" class="like-btn">💛 Нравится</button>
+</div>

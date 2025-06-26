@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ rider.name }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+    }
+    img {
+      border-radius: 12px;
+      max-width: 100%;
+    }
+    .like-btn {
+      background-color: #FFD700;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .like-btn:hover {
+      background-color: #ffb700;
+    }
+    a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>{{ rider.name }}</h1>
+    <img src="{{ rider.photo.url }}" alt="{{ rider.name }}">
+    <p>{{ rider.bio }}</p>
+
+    <h3>Велосипед</h3>
+    {% if rider.bike %}
+      <img src="{{ rider.bike.photo.url }}" alt="bike">
+      <p><strong>{{ rider.bike.brand }} {{ rider.bike.model }}</strong></p>
+    {% else %}
+      <p>Нет информации о велосипеде</p>
+    {% endif %}
+
+    {% include 'core/like_block.html' %}
+
+    <br><br>
+    <a href="{% url 'home' %}">← Назад</a>
+  </div>
+
+</body>
+</html>

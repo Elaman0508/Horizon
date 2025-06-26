@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horizon Team</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000;
+      color: #FFD700;
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      text-align: center;
+      padding: 40px 0 20px;
+    }
+
+    .logo {
+      width: 160px;
+      animation: fadeInScale 1.8s ease-in-out;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-top: 10px;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #111;
+      border: 2px solid #FFD70033;
+      border-radius: 16px;
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #FFD70066;
+    }
+
+    .rider-photo {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .bio {
+      font-size: 14px;
+      color: #aaa;
+      margin: 10px 0;
+      min-height: 40px;
+    }
+
+    .likes {
+      margin: 8px 0;
+      font-size: 15px;
+    }
+
+    a.details {
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    a.details:hover {
+      text-decoration: underline;
+    }
+
+    .rating-button {
+      display: block;
+      width: fit-content;
+      margin: 40px auto 60px;
+      background: #FFD700;
+      color: black;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .rating-button:hover {
+      background: #ffcc00;
+    }
+
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* 🔽 Адаптация под мобильные */
+    @media (max-width: 600px) {
+      .grid {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+      }
+
+      .card {
+        width: 90%;
+        padding: 16px;
+      }
+
+      .logo {
+        width: 120px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .rating-button {
+        width: 80%;
+        font-size: 15px;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="/static/logo/horizon.jpg" class="logo" alt="Horizon Logo">
+    <h1>Команда Horizon</h1>
+  </div>
+
+  <div class="grid">
+    {% for rider in riders %}
+      <div class="card">
+        <img src="{{ rider.photo.url }}" alt="{{ rider.name }}" class="rider-photo">
+        <h3>{{ rider.name }}</h3>
+
+        {% if rider.bio %}
+          <div class="bio">{{ rider.bio }}</div>
+        {% endif %}
+
+        <div class="likes">Лайков: {{ rider.likes_count }}</div>
+        <a class="details" href="{% url 'rider_detail' rider.pk %}">Подробнее →</a>
+      </div>
+    {% endfor %}
+  </div>
+
+  <a href="{% url 'bike_rating' %}" class="rating-button">🏆 Рейтинг велосипедов</a>
+
+</body>
+</html>

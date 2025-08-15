@@ -5,6 +5,7 @@ class Rider(models.Model):
     bio = models.TextField(blank=True)
     photo = models.ImageField(upload_to='riders/')
 
+
     def likes_count(self):
         return self.likes.count()
 

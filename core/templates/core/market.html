@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Веломаркет | Horizon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #000;
+            color: #FFD700;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 60%;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .bike-card {
+            background: #111;
+            border: 2px solid #FFD70033;
+            border-radius: 16px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .bike-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .bike-card h3 {
+            margin: 10px 0 5px;
+        }
+
+        .bike-card p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .price {
+            color: #FFD700;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .contact {
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        .gallery {
+            display: flex;
+            gap: 6px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .gallery img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚲 Веломаркет от Horizon</h1>
+
+        <form method="get">
+            <input type="text" name="q" placeholder="Поиск по названию, бренду, типу..." value="{{ query }}">
+        </form>
+
+        <div class="grid">
+            {% for bike in bikes %}
+                <div class="bike-card">
+                    {% if bike.photos.all %}
+                        <img src="{{ bike.photos.first.image.url }}" alt="{{ bike.title }}">
+                    {% else %}
+                        <img src="/static/img/no-photo.jpg" alt="Нет фото">
+                    {% endif %}
+
+                    <h3>{{ bike.title }}</h3>
+                    <p>Бренд: {{ bike.brand }}</p>
+                    <p>Тип: {{ bike.get_type_display }}</p>
+                    <p class="price">{{ bike.price }} сом</p>
+                    <p class="contact">Контакт: {{ bike.contact }}</p>
+
+                    {% if bike.photos.all|length > 1 %}
+                        <div class="gallery">
+                            {% for photo in bike.photos.all %}
+                                <img src="{{ photo.image.url }}" alt="Фото {{ forloop.counter }}">
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>Ничего не найдено.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

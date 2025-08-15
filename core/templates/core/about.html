@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>О Horizon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: black;
+      color: #FFD700;
+      font-family: 'Orbitron', sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+    .logo {
+      width: 180px;
+      margin-bottom: 20px;
+    }
+    .content {
+      max-width: 600px;
+      margin: auto;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    a {
+      color: #FFD700;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <img src="/static/logo/horizon.jpg" class="logo" alt="Horizon logo">
+  <h1>О команде Horizon</h1>
+
+  <div class="content">
+    <p><strong>Horizon</strong> — это велосипедная команда из Кыргызстана, созданная из любви к скорости, свободе и дружбе. Мы участвуем в локальных и международных заездах, объединяя райдеров разных возрастов.</p>
+
+    <p>Наша цель — продвигать велокультуру, вдохновлять новичков и делиться стилем 🚴‍♂️✨</p>
+
+    <p>Связаться: <a href="mailto:horizon@team.kg">horizon@team.kg</a></p>
+  </div>
+
+  <br><br>
+  <a href="{% url 'home' %}">← Назад на главную</a>
+</body>
+</html>

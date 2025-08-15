@@ -6,4 +6,6 @@ urlpatterns = [
     path('rider/<int:pk>/', views.rider_detail, name='rider_detail'),
     path('like/<int:pk>/', views.like_rider, name='like_rider'),
     path('bikes/', views.bike_rating, name='bike_rating'),
+    path('about/', views.about, name='about'),
+    path('market/', views.market, name='market'),
 ]

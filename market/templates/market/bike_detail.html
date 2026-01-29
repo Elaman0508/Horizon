@@ -1,0 +1,81 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-2 gap-10">
+
+  <!-- Фото -->
+
+  <div>
+    <img src="{{ bike.preview.url }}"
+         class="w-full rounded-2xl shadow-lg">
+  </div>
+
+  <!-- Инфо -->
+
+  <div class="space-y-6">
+    <h1 class="text-3xl font-bold text-yellow-400">
+      {{ bike.title }}
+    </h1>
+
+```
+<p class="text-gray-400">
+  {{ bike.brand }} · {{ bike.get_type_display }}
+</p>
+
+<p class="text-2xl font-bold">
+  {{ bike.price }} сом
+</p>
+
+<p class="text-gray-300 leading-relaxed">
+  {{ bike.description }}
+</p>
+
+<div class="flex gap-4">
+  <button class="bg-yellow-400 text-black px-6 py-3 rounded-xl font-bold
+                 hover:bg-yellow-300 transition">
+    ❤️ В избранное
+  </button>
+
+  <button class="border border-yellow-400 px-6 py-3 rounded-xl
+                 hover:bg-yellow-400 hover:text-black transition">
+    📞 Связаться
+  </button>
+</div>
+```
+
+  </div>
+
+</div>
+
+{% endblock %}
+
+
+
+{% if similar_bikes %}
+
+<div class="max-w-6xl mx-auto px-4 pb-16">
+  <h2 class="text-2xl font-bold text-yellow-400 mb-6">
+    🔥 Похожие велосипеды
+  </h2>
+
+  <div class="grid md:grid-cols-4 gap-6">
+    {% for bike in similar_bikes %}
+      <a href="{% url 'bike_detail' bike.id %}"
+         class="bg-zinc-900 rounded-xl overflow-hidden
+                hover:scale-105 transition block">
+
+```
+    <img src="{{ bike.preview.url }}"
+         class="h-40 w-full object-cover">
+
+    <div class="p-3">
+      <h3 class="font-bold">{{ bike.title }}</h3>
+      <p class="text-yellow-400 text-sm">{{ bike.price }} сом</p>
+    </div>
+  </a>
+{% endfor %}
+```
+
+  </div>
+</div>
+{% endif %}

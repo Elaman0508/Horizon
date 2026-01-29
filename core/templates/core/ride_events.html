@@ -1,0 +1,24 @@
+<!-- core/templates/core/ride_events.html -->
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-6">Выезды команды</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {% for event in events %}
+    <div class="border p-4 rounded shadow">
+        <h2 class="text-xl font-semibold">{{ event.title }}</h2>
+        <p>{{ event.date_time|date:"d.m.Y H:i" }} | {{ event.location }}</p>
+        <p>{{ event.description }}</p>
+        {% if event.photos.all %}
+        <div class="flex gap-2 mt-2 overflow-x-auto">
+            {% for photo in event.photos.all %}
+            <img src="{{ photo.image.url }}" alt="Фото" class="w-32 h-32 object-cover rounded">
+            {% endfor %}
+        </div>
+        {% endif %}
+        <a href="{% url 'ride_event_detail' event.pk %}" class="mt-2 inline-block bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Подробнее и комментарии</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

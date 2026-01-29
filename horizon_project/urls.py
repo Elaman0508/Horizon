@@ -5,8 +5,14 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls')),  # подключим наше приложение
+
+    # core — о команде, выезды и т.д.
+    path('', include('core.urls')),
+
+    # market — все маршруты для веломаркета
+    path('market/', include('market.urls')),
 ]
 
+# Медиа-файлы (фото велосипедов, выездов)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

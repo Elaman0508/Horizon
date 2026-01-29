@@ -1,0 +1,132 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<div class="max-w-7xl mx-auto px-4 py-10">
+
+  <!-- 🔍 ФИЛЬТР -->
+
+  <form method="get" class="flex flex-wrap gap-4 mb-10">
+    <select name="type" class="bg-zinc-900 text-white p-3 rounded-xl">
+      <option value="">Тип</option>
+      <option value="mtb">MTB</option>
+      <option value="road">Road</option>
+      <option value="fixie">Fixie</option>
+    </select>
+
+```
+<input name="brand"
+       placeholder="Бренд"
+       class="bg-zinc-900 p-3 rounded-xl text-white">
+
+<input name="price"
+       type="number"
+       placeholder="Цена до"
+       class="bg-zinc-900 p-3 rounded-xl text-white">
+
+<button class="bg-yellow-400 text-black px-6 rounded-xl font-bold">
+  Фильтр
+</button>
+```
+
+  </form>
+
+  <!-- 🏆 ТОП ВЕЛИКИ -->
+
+{% if top_bikes %}
+
+  <h2 class="text-2xl font-bold text-yellow-400 mb-6">🏆 ТОП велосипеды</h2>
+
+  <div class="grid md:grid-cols-3 gap-6 mb-14">
+    {% for bike in top_bikes %}
+      <a href="{% url 'bike_detail' bike.id %}"
+         class="bg-zinc-900 rounded-2xl overflow-hidden
+                hover:scale-105 transition block">
+
+```
+    <img src="{{ bike.preview.url }}"
+         class="h-48 w-full object-cover">
+
+    <div class="p-4">
+      <h3 class="font-bold">{{ bike.title }}</h3>
+      <p class="text-yellow-400">{{ bike.price }} сом</p>
+      <p class="text-sm text-gray-400">❤️ {{ bike.likes_count }}</p>
+    </div>
+  </a>
+{% endfor %}
+```
+
+  </div>
+  {% endif %}
+
+  <!-- 🚲 ВСЕ ВЕЛИКИ -->
+
+  <h2 class="text-2xl font-bold text-yellow-400 mb-6">🚲 Все велосипеды</h2>
+
+  <div class="grid md:grid-cols-3 gap-8">
+    {% for bike in page_obj %}
+      <a href="{% url 'bike_detail' bike.id %}"
+         class="group bg-zinc-900 rounded-2xl overflow-hidden
+                hover:scale-[1.03] transition-all duration-300
+                hover:shadow-[0_0_30px_rgba(255,214,0,0.15)] block">
+
+```
+    <div class="relative h-56 overflow-hidden">
+      <img src="{{ bike.preview.url }}"
+           class="w-full h-full object-cover
+                  group-hover:scale-110 transition duration-500">
+
+      <span class="absolute top-3 left-3 bg-black/70 text-yellow-400
+                   text-xs px-3 py-1 rounded-full">
+        {{ bike.get_type_display }}
+      </span>
+    </div>
+
+    <div class="p-4 space-y-2">
+      <h3 class="text-lg font-bold group-hover:text-yellow-400 transition">
+        {{ bike.title }}
+      </h3>
+
+      <p class="text-sm text-gray-400">
+        {{ bike.brand }}
+      </p>
+
+      <div class="flex justify-between items-center pt-2">
+        <span class="text-xl font-bold text-yellow-400">
+          {{ bike.price }} сом
+        </span>
+
+        <span class="flex items-center gap-1 text-sm text-gray-300">
+          ❤️ {{ bike.like_set.count }}
+        </span>
+      </div>
+    </div>
+  </a>
+{% empty %}
+  <p class="text-gray-400">Нет велосипедов</p>
+{% endfor %}
+```
+
+  </div>
+
+  <!-- 📄 ПАГИНАЦИЯ -->
+
+  <div class="flex justify-center gap-4 mt-12">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}"
+         class="px-4 py-2 bg-zinc-800 rounded">←</a>
+    {% endif %}
+
+```
+<span class="px-4 py-2">{{ page_obj.number }}</span>
+
+{% if page_obj.has_next %}
+  <a href="?page={{ page_obj.next_page_number }}"
+     class="px-4 py-2 bg-zinc-800 rounded">→</a>
+{% endif %}
+```
+
+  </div>
+
+</div>
+
+{% endblock %}

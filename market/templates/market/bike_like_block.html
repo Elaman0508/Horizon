@@ -1,0 +1,8 @@
+<button
+ hx-post="{% url 'like_bike' bike.pk %}"
+ hx-swap="outerHTML"
+ class="flex items-center gap-2 px-4 py-2 rounded-full
+        bg-black border border-[#FFD400]
+        text-[#FFD400] font-semibold
+        hover:bg-[#FFD400] hover:text-black transition">
+❤️ {{ bike.likes.count }} </button>

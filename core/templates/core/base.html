@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>HORIZON</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            horizon: '#FFD600'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-black text-gray-200 min-h-screen">
+
+  <!-- HEADER -->
+  <header class="border-b border-yellow-500">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-horizon">HORIZON</h1>
+
+      <nav class="flex gap-6 text-sm">
+        <a href="/market/" class="hover:text-horizon">Маркет</a>
+        <a href="/rides/" class="hover:text-horizon">Выезды</a>
+        <a href="/about/" class="hover:text-horizon">О команде</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+</body>
+</html>

@@ -1,5 +1,8 @@
 asgiref==3.8.1
 Django==5.2.3
+gunicorn==24.1.1
+packaging==26.0
 pillow==11.2.1
+python-dotenv==1.2.1
 sqlparse==0.5.3
-python-dotenv
+whitenoise==6.11.0
